@@ -1,23 +1,25 @@
+const { merge } = require('webpack-merge')
 const path = require('path')
+const parts = require('./webpack.parts')
 
-module.exports = {
-  entry: ['./src/index.tsx'],
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'index_bundle.js'
+const commonConfig = merge([
+  { entry: ['./src/index.tsx'] },
+  {
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'index_bundle.js'
+    }
   },
-  module: {
-    rules: [
-      {
-        test: /\.(ts|tsx)$/,
-        exclude: /node_modules/,
-        resolve: {
-          extensions: ['.js', '.ts', '.tsx']
-        },
-        use: [{
-          loader: 'ts-loader'
-        }]
-      }
-    ]
+  parts.jsLoader()
+])
+
+const getConfig = (mode) => {
+  switch (mode) {
+    case 'development':
+      return merge(commonConfig, { mode })
+    default:
+      throw new Error(`Trying to use an unkown mode: ${mode}`)
   }
 }
+
+module.exports = (env, argv) => getConfig(argv.mode)
