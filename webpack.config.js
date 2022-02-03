@@ -2,6 +2,8 @@ const { merge } = require('webpack-merge')
 const path = require('path')
 const parts = require('./webpack.parts')
 
+const cssLoaders = [parts.autoprefix(), parts.tailwind()]
+
 const commonConfig = merge([
   { entry: ['./src/index.tsx'] },
   {
@@ -10,7 +12,8 @@ const commonConfig = merge([
       filename: 'index_bundle.js'
     }
   },
-  parts.jsLoader()
+  parts.jsLoader(),
+  parts.extractCSS({ loaders: cssLoaders })
 ])
 
 const developmentConfig = parts.devServer()
@@ -19,6 +22,8 @@ const getConfig = (mode) => {
   switch (mode) {
     case 'development':
       return merge(commonConfig, developmentConfig, { mode })
+    case 'production':
+      return merge(commonConfig, { mode })
     default:
       throw new Error(`Trying to use an unkown mode: ${mode}`)
   }
