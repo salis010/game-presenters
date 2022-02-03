@@ -1,3 +1,5 @@
+const path = require('path')
+
 // js loader
 exports.jsLoader = () => ({
   module: {
@@ -13,5 +15,13 @@ exports.jsLoader = () => ({
         }]
       }
     ]
+  }
+})
+
+exports.devServer = () => ({
+  devServer: {
+    static: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 4000
   }
 })

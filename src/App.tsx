@@ -2,6 +2,6 @@ import React, { FunctionComponent } from 'react'
 
 export const App: FunctionComponent = () => {
   return (
-    <h1>Hello</h1>
+    <h1>Hello world!</h1>
   )
 }

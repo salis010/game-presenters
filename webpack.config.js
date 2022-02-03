@@ -13,10 +13,12 @@ const commonConfig = merge([
   parts.jsLoader()
 ])
 
+const developmentConfig = parts.devServer()
+
 const getConfig = (mode) => {
   switch (mode) {
     case 'development':
-      return merge(commonConfig, { mode })
+      return merge(commonConfig, developmentConfig, { mode })
     default:
       throw new Error(`Trying to use an unkown mode: ${mode}`)
   }
