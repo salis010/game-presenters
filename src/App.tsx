@@ -1,14 +1,18 @@
 import React, { FunctionComponent, useEffect } from 'react'
-import { GAME_PRESENTERS_ENDPOINT } from './constants/endpoints'
+import { useDispatch } from 'react-redux'
+import { fetchPresenters } from './store/presenters/presenters-thunks'
+import { Presenters } from './components/Presenters'
 
 export const App: FunctionComponent = () => {
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    fetch(GAME_PRESENTERS_ENDPOINT)
-      .then(async res => await res.json())
-      .then(data => console.log(data))
-      .catch(err => console.log(`There was an error with getting game presenters data: ${err as string}`))
+    dispatch(fetchPresenters())
   }, [])
+
   return (
-    <h1 className='font-bold text-5xl text-red-300 ml-[-10px]'>Hello world!</h1>
+    <div className='flex flex-col'>
+      <Presenters />
+    </div>
   )
 }

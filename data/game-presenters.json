@@ -1,6 +1,8 @@
 {
-    "1": {
-        "name": "Jane",
-        "surname": "Cole"
-    }
+    "presenters": [
+        {
+            "name": "Jane",
+            "surname": "Cole"
+        }
+    ]
 }
