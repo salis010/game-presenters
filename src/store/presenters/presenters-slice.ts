@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { fetchPresenters } from './fetchPresenters'
 import { createPresenter } from './createPresenter'
 import { editPresenter } from './editPresenter'
+import { deletePresenter } from './deletePresenter'
 
 export interface IPresenter {
   id: number
@@ -62,6 +63,18 @@ export const presentersSlice = createSlice({
         state.presentersData = action.payload.presenters
       })
       .addCase(editPresenter.rejected, (state) => {
+        state.isLoading = false
+        // TODO: error handling
+      })
+      // deletePresenters
+      .addCase(deletePresenter.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deletePresenter.fulfilled, (state, action: PayloadAction<IPresentersData>) => {
+        state.isLoading = false
+        state.presentersData = action.payload.presenters
+      })
+      .addCase(deletePresenter.rejected, (state) => {
         state.isLoading = false
         // TODO: error handling
       })

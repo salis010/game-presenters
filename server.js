@@ -87,6 +87,37 @@ app.put('/game-presenters-data', (req, res) => {
   })
 })
 
+app.delete('/game-presenters-data', (req, res) => {
+  fs.readFile(PRESENTERS_FILE, (err, data) => {
+    if (err) {
+      const errorMessage = `Error, failed to open ${PRESENTERS_FILE}: ${err}`
+      console.log(errorMessage)
+
+      res.status(400)
+      res.send(errorMessage)
+    }
+
+    const fileData = JSON.parse(data)
+    const { id } = req.body
+    const index = fileData.presenters.findIndex(presenter => presenter.id === id)
+
+    fileData.presenters.splice(index, 1)
+
+    fs.writeFile(PRESENTERS_FILE, JSON.stringify(fileData), (err) => {
+      if (err) {
+        const errorMessage = `There was an error with deleting ${req.body} from ${PRESENTERS_FILE}: ${err}`
+        console.log(errorMessage)
+
+        res.status(400)
+        res.send(errorMessage)
+      } else {
+        res.status(200)
+        res.send(JSON.stringify(fileData))
+      }
+    })
+  })
+})
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })
