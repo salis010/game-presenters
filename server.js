@@ -56,6 +56,37 @@ app.post('/game-presenters-data', (req, res) => {
   })
 })
 
+app.put('/game-presenters-data', (req, res) => {
+  fs.readFile(PRESENTERS_FILE, (err, data) => {
+    if (err) {
+      const errorMessage = `Error, failed to open ${PRESENTERS_FILE}: ${err}`
+      console.log(errorMessage)
+
+      res.status(400)
+      res.send(errorMessage)
+    }
+
+    const fileData = JSON.parse(data)
+    const { id, name, surname } = req.body
+    const index = fileData.presenters.findIndex(presenter => presenter.id === id)
+    fileData.presenters[index].name = name
+    fileData.presenters[index].surname = surname
+
+    fs.writeFile(PRESENTERS_FILE, JSON.stringify(fileData), (err) => {
+      if (err) {
+        const errorMessage = `There was an error with updating ${req.body} to ${PRESENTERS_FILE}: ${err}`
+        console.log(errorMessage)
+
+        res.status(400)
+        res.send(errorMessage)
+      } else {
+        res.status(200)
+        res.send(JSON.stringify(fileData))
+      }
+    })
+  })
+})
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })

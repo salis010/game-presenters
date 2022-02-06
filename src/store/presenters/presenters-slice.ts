@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { fetchPresenters } from './fetchPresenters'
 import { createPresenter } from './createPresenter'
+import { editPresenter } from './editPresenter'
 
 export interface IPresenter {
   id: number
@@ -28,6 +29,7 @@ export const presentersSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
+      // fetchPresenters
       .addCase(fetchPresenters.pending, (state) => {
         state.isLoading = true
       })
@@ -39,6 +41,7 @@ export const presentersSlice = createSlice({
         state.isLoading = false
         // TODO: error handling
       })
+      // createPresenters
       .addCase(createPresenter.pending, (state) => {
         state.isLoading = true
       })
@@ -47,6 +50,18 @@ export const presentersSlice = createSlice({
         state.presentersData = action.payload.presenters
       })
       .addCase(createPresenter.rejected, (state) => {
+        state.isLoading = false
+        // TODO: error handling
+      })
+      // editPresenters
+      .addCase(editPresenter.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(editPresenter.fulfilled, (state, action: PayloadAction<IPresentersData>) => {
+        state.isLoading = false
+        state.presentersData = action.payload.presenters
+      })
+      .addCase(editPresenter.rejected, (state) => {
         state.isLoading = false
         // TODO: error handling
       })
