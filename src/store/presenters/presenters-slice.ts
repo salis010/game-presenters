@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { fetchPresenters } from './presenters-thunks'
+import { fetchPresenters } from './fetchPresenters'
+import { createPresenter } from './createPresenter'
 
 export interface IPresenter {
+  id: number
   name: string
   surname: string
 }
@@ -34,6 +36,17 @@ export const presentersSlice = createSlice({
         state.presentersData = action.payload.presenters
       })
       .addCase(fetchPresenters.rejected, (state) => {
+        state.isLoading = false
+        // TODO: error handling
+      })
+      .addCase(createPresenter.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(createPresenter.fulfilled, (state, action: PayloadAction<IPresentersData>) => {
+        state.isLoading = false
+        state.presentersData = action.payload.presenters
+      })
+      .addCase(createPresenter.rejected, (state) => {
         state.isLoading = false
         // TODO: error handling
       })

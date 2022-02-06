@@ -1,8 +1,1 @@
-{
-    "presenters": [
-        {
-            "name": "Jane",
-            "surname": "Cole"
-        }
-    ]
-}
+{"presenters":[{"id":0,"name":"Jane","surname":"Cole"},{"id":1,"name":"John","surname":"Doe"}]}
