@@ -1,11 +1,11 @@
 import React, { FunctionComponent, ChangeEvent, FormEvent, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { InputText } from './common/InputText'
-import { Button } from './common/Button'
-import { setIsPresenterModalOpen, setPresenterBeingEdited, resetPresenterBeingEdited } from '../store/presenters/presenters-slice'
-import { createPresenter } from '../store/presenters/createPresenter'
-import { editPresenter } from '../store/presenters/editPresenter'
-import { IState } from '../store'
+import { InputText } from '../common/InputText'
+import { Button } from '../common/Button'
+import { setIsPresenterModalOpen, setPresenterBeingEdited, resetPresenterBeingEdited } from '../../store/presenters/presenters-slice'
+import { createPresenter } from '../../store/presenters/createPresenter'
+import { editPresenter } from '../../store/presenters/editPresenter'
+import { IState } from '../../store'
 
 export const PresenterModal: FunctionComponent = () => {
   const { presenterBeingEdited, isCreatingNewPresenter } = useSelector((state: IState) => state.presenters)
