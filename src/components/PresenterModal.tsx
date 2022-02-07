@@ -1,15 +1,14 @@
-import React, { FunctionComponent, useState, ChangeEvent, FormEvent, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { FunctionComponent, ChangeEvent, FormEvent, useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { InputText } from './common/InputText'
 import { Button } from './common/Button'
-import { setIsPresenterModalOpen } from '../store/presenters/presenters-slice'
+import { setIsPresenterModalOpen, setPresenterBeingEdited, resetPresenterBeingEdited } from '../store/presenters/presenters-slice'
 import { createPresenter } from '../store/presenters/createPresenter'
+import { editPresenter } from '../store/presenters/editPresenter'
+import { IState } from '../store'
 
 export const PresenterModal: FunctionComponent = () => {
-  const [formState, setFormState] = useState({
-    name: '',
-    surname: ''
-  })
+  const { presenterBeingEdited, isCreatingNewPresenter } = useSelector((state: IState) => state.presenters)
   const [isFormDisabled, setIsFormDisabled] = useState(true)
   const dispatch = useDispatch()
 
@@ -20,39 +19,45 @@ export const PresenterModal: FunctionComponent = () => {
       text = text[0].toUpperCase() + text.slice(1)
     }
 
-    setFormState({
-      ...formState,
+    const newPresenter = {
+      ...presenterBeingEdited,
       [event.target.name.toLowerCase()]: text
-    })
+    }
+
+    dispatch(setPresenterBeingEdited(newPresenter))
   }
 
-  const createPresenterHandler = (event: FormEvent): void => {
+  const presenterHandler = (event: FormEvent): void => {
     event.preventDefault()
 
     const newPresenter = {
-      name: formState.name.trim(),
-      surname: formState.surname.trim()
+      name: presenterBeingEdited.name.trim(),
+      surname: presenterBeingEdited.surname.trim()
     }
 
-    dispatch(createPresenter(newPresenter))
+    isCreatingNewPresenter
+      ? dispatch(createPresenter(newPresenter))
+      : dispatch(editPresenter({ id: presenterBeingEdited.id, ...newPresenter }))
+
     dispatch(setIsPresenterModalOpen(false))
   }
 
   const closePresenterModalHandler = (): void => {
     dispatch(setIsPresenterModalOpen(false))
+    dispatch(resetPresenterBeingEdited())
   }
 
   useEffect(() => {
-    setIsFormDisabled(formState.name.length < 2 || formState.surname.length < 2)
-  }, [formState])
+    setIsFormDisabled(presenterBeingEdited.name.length < 2 || presenterBeingEdited.surname.length < 2)
+  }, [presenterBeingEdited])
 
   return (
     <form
       className='flex flex-col w-full p-8 border-4 border-presenter-200'
-      onSubmit={createPresenterHandler}
+      onSubmit={presenterHandler}
     >
-      <InputText labelName='Name' value={formState.name} changeHandler={textChangeHandler} />
-      <InputText labelName='Surname' value={formState.surname} changeHandler={textChangeHandler} />
+      <InputText labelName='Name' value={presenterBeingEdited.name} changeHandler={textChangeHandler} />
+      <InputText labelName='Surname' value={presenterBeingEdited.surname} changeHandler={textChangeHandler} />
       <div className='flex justify-between'>
         <Button
           name='Cancel'
@@ -62,7 +67,7 @@ export const PresenterModal: FunctionComponent = () => {
           size='w-1/3'
         />
         <Button
-          name='Add'
+          name={isCreatingNewPresenter ? 'Add' : 'Edit'}
           type='submit'
           colorStyle='bg-presenter-200 text-secondary-50'
           size='w-1/3'
