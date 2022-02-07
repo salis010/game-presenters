@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { GAME_PRESENTERS_ENDPOINT } from '../../constants/endpoints'
+import { PRESENTERS_ENDPOINT } from '../../constants/endpoints'
 
 interface INewPresenter {
   name: string
@@ -7,7 +7,7 @@ interface INewPresenter {
 }
 
 export const createPresenter = createAsyncThunk('presenters/createPresenter', async (newPresenter: INewPresenter) => {
-  const data = (await fetch(GAME_PRESENTERS_ENDPOINT, {
+  const data = (await fetch(PRESENTERS_ENDPOINT, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

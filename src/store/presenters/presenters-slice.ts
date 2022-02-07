@@ -37,7 +37,7 @@ export const presentersSlice = createSlice({
     setIsPresenterModalOpen: (state, action: PayloadAction<boolean>) => { state.isPresenterModalOpen = action.payload },
     setPresenterBeingEdited: (state, action: PayloadAction<IPresenter>) => { state.presenterBeingEdited = action.payload },
     resetPresenterBeingEdited: (state) => { state.presenterBeingEdited = { id: 0, name: '', surname: '' } },
-    setisCreatingNewPresenter: (state, action: PayloadAction<boolean>) => { state.isCreatingNewPresenter = action.payload }
+    setIsCreatingNewPresenter: (state, action: PayloadAction<boolean>) => { state.isCreatingNewPresenter = action.payload }
   },
   extraReducers: builder => {
     builder
@@ -76,7 +76,7 @@ export const {
   setIsPresenterModalOpen,
   setPresenterBeingEdited,
   resetPresenterBeingEdited,
-  setisCreatingNewPresenter
+  setIsCreatingNewPresenter
 } = presentersSlice.actions
 
 export const presenters = presentersSlice.reducer

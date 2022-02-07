@@ -21,8 +21,7 @@ export const Presenter: FunctionComponent<IPresenterComponent> = ({ presenter, r
   }
 
   const deletePresenterHandler = (): void => {
-    const deletePresenterId = 2
-    dispatch(deletePresenter(deletePresenterId))
+    dispatch(deletePresenter(id))
   }
 
   return (
