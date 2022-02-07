@@ -18,19 +18,26 @@ export interface IPresentersInitialState {
   presentersData: IPresenter[]
   isPresenterModalOpen: boolean
   isLoading: boolean
+  presenterBeingEdited: IPresenter
+  isCreatingNewPresenter: boolean
 }
 
 export const presentersInitialState: IPresentersInitialState = {
   presentersData: [],
   isPresenterModalOpen: false,
-  isLoading: false
+  isLoading: false,
+  presenterBeingEdited: { id: 0, name: '', surname: '' },
+  isCreatingNewPresenter: false
 }
 
 export const presentersSlice = createSlice({
   name: 'presenters',
   initialState: presentersInitialState,
   reducers: {
-    setIsPresenterModalOpen: (state, action: PayloadAction<boolean>) => { state.isPresenterModalOpen = action.payload }
+    setIsPresenterModalOpen: (state, action: PayloadAction<boolean>) => { state.isPresenterModalOpen = action.payload },
+    setPresenterBeingEdited: (state, action: PayloadAction<IPresenter>) => { state.presenterBeingEdited = action.payload },
+    resetPresenterBeingEdited: (state) => { state.presenterBeingEdited = { id: 0, name: '', surname: '' } },
+    setisCreatingNewPresenter: (state, action: PayloadAction<boolean>) => { state.isCreatingNewPresenter = action.payload }
   },
   extraReducers: builder => {
     builder
@@ -66,7 +73,10 @@ export const presentersSlice = createSlice({
 })
 
 export const {
-  setIsPresenterModalOpen
+  setIsPresenterModalOpen,
+  setPresenterBeingEdited,
+  resetPresenterBeingEdited,
+  setisCreatingNewPresenter
 } = presentersSlice.actions
 
 export const presenters = presentersSlice.reducer
