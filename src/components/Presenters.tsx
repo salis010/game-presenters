@@ -1,29 +1,34 @@
 import React, { FunctionComponent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Presenter } from './Presenter'
-import { createPresenter } from '../store/presenters/createPresenter'
+import { PresenterModal } from './PresenterModal'
+import { Button } from './common/Button'
+import { setIsPresenterModalOpen } from '../store/presenters/presenters-slice'
 import { IState } from '../store'
 
 export const Presenters: FunctionComponent = () => {
-  const { presentersData } = useSelector((state: IState) => state.presenters)
+  const { presentersData, isPresenterModalOpen } = useSelector((state: IState) => state.presenters)
   const dispatch = useDispatch()
 
-  const createPresenterHandler = (): void => {
-    const newPresenter = { name: 'Svetlana', surname: 'Dubrovna' }
-    dispatch(createPresenter(newPresenter))
+  const openPresenterModalHandler = (): void => {
+    dispatch(setIsPresenterModalOpen(true))
   }
 
   return (
     <div className='w-[400px]'>
-      <ul>
-        {presentersData.map((presenter, i) => <Presenter key={presenter.id} {...presenter} />)}
-      </ul>
-      <button
-        onClick={createPresenterHandler}
-        className='w-full py-4 mt-2 text-3xl font-bold cursor-pointer bg-presenter-200 text-secondary-50'
-      >
-        Add presenter
-      </button>
+      {!isPresenterModalOpen &&
+        <>
+          <ul>
+            {presentersData.map((presenter, i) => <Presenter key={presenter.id} {...presenter} />)}
+          </ul>
+          <Button
+            name='Add presenter'
+            type='button'
+            clickHandler={openPresenterModalHandler}
+            colorStyle='bg-presenter-200 text-secondary-50'
+          />
+        </>}
+      {isPresenterModalOpen && <PresenterModal />}
     </div>
   )
 }

@@ -22,8 +22,10 @@ module.exports = {
       schedule: {
         100: 'rgb(41, 21, 155)',
         200: 'rgb(18, 21, 153)'
+      },
+      alert: {
+        50: 'rgb(255, 0, 0)'
       }
-
     },
     extend: {}
   },
