@@ -1,3 +1,4 @@
 export const BASE_URL = window.location.href
 
-export const GAME_PRESENTERS_ENDPOINT = `${BASE_URL}game-presenters-data`
+export const PRESENTERS_ENDPOINT = `${BASE_URL}presenters-data`
+export const TABLES_ENDPOINT = `${BASE_URL}tables-data`

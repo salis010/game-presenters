@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Presenter } from './Presenter'
 import { PresenterModal } from './PresenterModal'
-import { Button } from './common/Button'
-import { setisCreatingNewPresenter, setIsPresenterModalOpen } from '../store/presenters/presenters-slice'
-import { IState } from '../store'
+import { Button } from '../common/Button'
+import { setisCreatingNewPresenter, setIsPresenterModalOpen } from '../../store/presenters/presenters-slice'
+import { IState } from '../../store'
 
 export const Presenters: FunctionComponent = () => {
   const { presentersData, isPresenterModalOpen } = useSelector((state: IState) => state.presenters)
