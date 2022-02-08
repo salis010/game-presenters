@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Presenter } from './Presenter'
 import { PresenterModal } from './PresenterModal'
 import { Button } from '../common/Button'
-import { setisCreatingNewPresenter, setIsPresenterModalOpen } from '../../store/presenters/presenters-slice'
+import { setIsCreatingNewPresenter, setIsPresenterModalOpen } from '../../store/presenters/presenters-slice'
 import { IState } from '../../store'
 
 export const Presenters: FunctionComponent = () => {
@@ -12,7 +12,7 @@ export const Presenters: FunctionComponent = () => {
 
   const openPresenterModalHandler = (): void => {
     dispatch(setIsPresenterModalOpen(true))
-    dispatch(setisCreatingNewPresenter(true))
+    dispatch(setIsCreatingNewPresenter(true))
   }
 
   return (

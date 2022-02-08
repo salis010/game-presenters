@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { EditIcon } from '../../images/EditIcon'
 import { CloseIcon } from '../../images/CloseIcon'
 import { useDispatch } from 'react-redux'
-import { setPresenterBeingEdited, setisCreatingNewPresenter, setIsPresenterModalOpen, IPresenter } from '../../store/presenters/presenters-slice'
+import { setPresenterBeingEdited, setIsCreatingNewPresenter, setIsPresenterModalOpen, IPresenter } from '../../store/presenters/presenters-slice'
 import { deletePresenter } from '../../store/presenters/deletePresenter'
 
 interface IPresenterComponent {
@@ -17,7 +17,7 @@ export const Presenter: FunctionComponent<IPresenterComponent> = ({ presenter, r
   const editPresenterHandler = (): void => {
     dispatch(setPresenterBeingEdited({ id, name, surname }))
     dispatch(setIsPresenterModalOpen(true))
-    dispatch(setisCreatingNewPresenter(false))
+    dispatch(setIsCreatingNewPresenter(false))
   }
 
   const deletePresenterHandler = (): void => {
