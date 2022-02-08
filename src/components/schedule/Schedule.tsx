@@ -6,8 +6,11 @@ import { IState } from '../../store'
 
 export const Schedule: FunctionComponent = () => {
   const { timeSlots } = useSelector((state: IState) => state.schedule)
-  const timeSlotsPerDisplay = 6
-  const timeSlotsToDisplay = timeSlots.slice(0, timeSlotsPerDisplay)
+  const { currentPage, timeSlotsPerPage } = useSelector((state: IState) => state.schedule.pagination)
+
+  const startTimeSlot = currentPage * timeSlotsPerPage
+  const endTimeSlot = startTimeSlot + timeSlotsPerPage
+  const timeSlotsToDisplay = timeSlots.slice(startTimeSlot, endTimeSlot)
 
   return (
     <div className='flex flex-col w-[900px]  items-center'>
