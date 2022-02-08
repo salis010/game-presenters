@@ -14,3 +14,9 @@ These validations are implemented:
 - Minimum length of 2 characters
 - Trimming of extra spaces
 
+## Delays
+
+- set up multiple ssh keys locally
+- set up the project
+- create the backend
+- set up jest to process TypeScript files
