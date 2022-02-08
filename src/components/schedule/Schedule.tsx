@@ -8,6 +8,7 @@ export const Schedule: FunctionComponent = () => {
 
   useEffect(() => {
     const timeSlots = generateTimeSlots()
+    dispatch(setTimeSlots(timeSlots))
 
     console.log(timeSlots)
   }, [])

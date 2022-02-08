@@ -16,7 +16,7 @@ interface IGamePresenter extends IPresenter {
   timeslots: IPresenterTimeSlot[]
 }
 
-interface IScheduleInitialState {
+export interface IScheduleInitialState {
   timeSlots: ITimeSlot[]
   schedule: IGamePresenter[]
 }
