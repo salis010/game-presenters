@@ -1,24 +1,28 @@
 import { configureStore, EnhancedStore } from '@reduxjs/toolkit'
 import { ui, uiInitialState, IUIInitialState } from './ui/ui-slice'
-import { presenters, presentersInitialState, IPresentersInitialState } from './presenters/presenters-slice'
+import { schedule, scheduleInitialState, IScheduleInitialState } from './schedule/schedule-slice'
 import { tables, tablesInitialState, ITablesInitialState } from './tables/tables-slice'
+import { presenters, presentersInitialState, IPresentersInitialState } from './presenters/presenters-slice'
 
 export interface IState {
   ui: IUIInitialState
-  presenters: IPresentersInitialState
+  schedule: IScheduleInitialState
   tables: ITablesInitialState
+  presenters: IPresentersInitialState
 }
 
 const initialState: IState = {
   ui: uiInitialState,
-  presenters: presentersInitialState,
-  tables: tablesInitialState
+  schedule: scheduleInitialState,
+  tables: tablesInitialState,
+  presenters: presentersInitialState
 }
 
 const reducer = {
   ui,
-  presenters,
-  tables
+  schedule,
+  tables,
+  presenters
 }
 
 const initStore = (preloadedState = initialState): EnhancedStore => configureStore({

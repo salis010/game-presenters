@@ -5,6 +5,7 @@ import { Button } from '../common/Button'
 import { setIsPresenterModalOpen, setPresenterBeingEdited, resetPresenterBeingEdited } from '../../store/presenters/presenters-slice'
 import { createPresenter } from '../../store/presenters/createPresenter'
 import { editPresenter } from '../../store/presenters/editPresenter'
+import { rxTextInput } from '../../constants'
 import { IState } from '../../store'
 
 export const PresenterModal: FunctionComponent = () => {
@@ -13,7 +14,7 @@ export const PresenterModal: FunctionComponent = () => {
   const dispatch = useDispatch()
 
   const textChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
-    let text = (event.target.value).replace(/\d/g, '').replace(/\s\s+/g, ' ')
+    let text = (event.target.value).replace(rxTextInput, '').replace(/\s\s+/g, ' ')
 
     if (text.length > 0) {
       text = text[0].toUpperCase() + text.slice(1)

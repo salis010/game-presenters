@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack --mode development --watch",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,11 @@
     "redux-devtools-extension": "^2.13.9"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/jest": "^27.4.0",
+    "babel-jest": "^27.5.1",
     "css-loader": "^6.6.0",
     "jest": "^27.4.7",
     "mini-css-extract-plugin": "^2.5.3",

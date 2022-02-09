@@ -14,3 +14,18 @@ These validations are implemented:
 - Minimum length of 2 characters
 - Trimming of extra spaces
 
+## Testing
+
+### Unit Testing
+
+Example: src/utils/generateTimeSlots.test.ts
+
+Shows usage of `each`
+
+## Delays
+
+- set up the project
+- Webpack configuration (used pattern from https://www.amazon.co.uk/SurviveJS-Webpack-5-apprentice-master/dp/B08P2C69PR/ref=sr_1_1?crid=2H470DLUYI1N8&keywords=webpack&qid=1644328118&sprefix=webpack%2Caps%2C113&sr=8-1)
+- create the backend
+- set up jest to process TypeScript files
+- generate a list of 72+ presenter names

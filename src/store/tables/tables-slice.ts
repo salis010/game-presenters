@@ -7,6 +7,7 @@ import { deleteTable } from './deleteTable'
 export interface ITable {
   id: number
   name: string
+  active?: boolean
 }
 
 interface ITablesData {

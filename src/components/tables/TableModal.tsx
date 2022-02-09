@@ -5,6 +5,7 @@ import { Button } from '../common/Button'
 import { setIsTableModalOpen, setTableBeingEdited, resetTableBeingEdited } from '../../store/tables/tables-slice'
 import { createTable } from '../../store/tables/createTable'
 import { editTable } from '../../store/tables/editTable'
+import { rxTextInput } from '../../constants'
 import { IState } from '../../store'
 
 export const TableModal: FunctionComponent = () => {
@@ -13,7 +14,7 @@ export const TableModal: FunctionComponent = () => {
   const dispatch = useDispatch()
 
   const textChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
-    let text = (event.target.value).replace(/\d/g, '').replace(/\s\s+/g, ' ')
+    let text = (event.target.value).replace(rxTextInput, '').replace(/\s\s+/g, ' ')
 
     if (text.length > 0) {
       text = text[0].toUpperCase() + text.slice(1)
@@ -39,6 +40,7 @@ export const TableModal: FunctionComponent = () => {
       : dispatch(editTable({ id: tableBeingEdited.id, ...newTable }))
 
     dispatch(setIsTableModalOpen(false))
+    dispatch(resetTableBeingEdited())
   }
 
   const closeTableModalHandler = (): void => {
