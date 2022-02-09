@@ -5,7 +5,7 @@ import { setCurrentPage } from '../../store/schedule/schedule-slice'
 import { IState } from '../../store'
 
 export const Paginator: FunctionComponent = () => {
-  const { currentPage, timeSlotsPerPage, totalPages } = useSelector((state: IState) => state.schedule.pagination)
+  const { currentPage, totalPages } = useSelector((state: IState) => state.schedule.pagination)
   const dispatch = useDispatch()
   const style = 'text-secondary-50 bg-schedule-200 border-t border-r'
   const width = 'w-1/4'
